@@ -56,7 +56,8 @@ articleView.setTeasers = function() {
 };
 
 articleView.renderIndexPage = function() {
-  Article.all.forEach(function(a){
+  //Article.all.forEach(function(a){
+  Article.articles.forEach(function(a){
     $('#articles').append(a.toHtml('#article-template'));
     if($('#category-filter option:contains("'+ a.category + '")').length === 0) {
       $('#category-filter').append(a.toHtml('#category-filter-template'));
@@ -73,11 +74,8 @@ articleView.renderIndexPage = function() {
 
 $.ajax('/data/hackerIpsum.json', {
   	method: 'GET',
-  	success: function(response) {
-  		arrayOfArticles = response;
-      console.log(arrayOfArticles);
-      Article.articles = arrayOfArticles;
-      //push into articles array for loop?
+  	success: function(response){ // the response is hackerIpsum.json, but parsed
+    Article.sortAndPush(response); // response is an array of objects that will be sorted and pushed into the array on the variable Article.article
     articleView.renderIndexPage();
   	},
   	error: function(response) {

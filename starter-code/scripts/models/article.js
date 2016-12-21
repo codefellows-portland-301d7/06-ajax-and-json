@@ -29,11 +29,12 @@ Article.prototype.toHtml = function(scriptTemplateId) {
 
 /* TODO: Refactor this code into a function for greater control.
     It will take in our data, and process it via the Article constructor: */
+Article.sortAndPush = function (inputArr) {
+  inputArr.sort(function(a,b) {
+    return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
+  });
 
-Articles.articles.sort(function(a,b) {
-  return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
-});
-
-Articles.articles.forEach(function(ele) { //wtf
-  articles.push(new Article(ele));
-});
+  inputArr.forEach(function(ele) { 
+    Article.articles.push(new Article(ele));
+  });
+};
