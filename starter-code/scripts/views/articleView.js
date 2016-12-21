@@ -70,3 +70,19 @@ articleView.renderIndexPage = function() {
   articleView.setTeasers();
 };
 // TODO: start the retrieval process for our data!
+//unction(data, message, xhr) { console.log(xhr); }
+var ourLocalData;
+$.ajax('/data/hackerIpsum.json', {
+  method: 'GET',
+  success: function (response){
+    console.log('success!');
+    ourLocalData = response;
+    console.log('pre sort : ' + ourLocalData);
+    Article.processData();
+    console.log('articles: ' + Article.articles);
+
+  },
+  error: function (response){ //over 400
+    console.log('error!');
+  }
+});

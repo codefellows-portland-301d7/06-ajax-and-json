@@ -29,7 +29,7 @@ Article.prototype.toHtml = function(scriptTemplateId) {
 /* TODO: DONE Refactor this code into a function for greater control.
     It will take in our data, and process it via the Article constructor: */
 
-Article.prototype.processData = function() {
+Article.processData = function() {
   ourLocalData.sort(function(a,b) {
     return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
   });
