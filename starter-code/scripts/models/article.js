@@ -14,6 +14,8 @@ var articles = [];
  the prototype, as that would only be relevant to a single instantiated Article.
  */
 
+Article.articles = [];
+
 Article.prototype.toHtml = function(scriptTemplateId) {
   var template = Handlebars.compile($(scriptTemplateId).text());
   this.daysAgo = parseInt((new Date() - new Date(this.publishedOn))/60/60/24/1000);
