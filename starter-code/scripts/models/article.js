@@ -4,7 +4,7 @@ function Article (opts) {
   }
 }
 
-var articles = [];
+// var articles = [];
 
 /* TODO: Instead of a global `articles = []` array, let's track this list of all
  articles directly on the constructor function. Note: it is NOT on the prototype.
@@ -13,6 +13,8 @@ var articles = [];
  to track, that relates to ALL of the Article objects, so it does not belong on
  the prototype, as that would only be relevant to a single instantiated Article.
  */
+
+Article.articles = [];
 
 Article.prototype.toHtml = function(scriptTemplateId) {
   var template = Handlebars.compile($(scriptTemplateId).text());
@@ -30,10 +32,18 @@ Article.prototype.toHtml = function(scriptTemplateId) {
 /* TODO: Refactor this code into a function for greater control.
     It will take in our data, and process it via the Article constructor: */
 
-ourLocalData.sort(function(a,b) {
-  return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
-});
+// ourLocalData.sort(function(a,b) {
+//   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
+// });
+//
+// ourLocalData.forEach(function(ele) {
+//   articles.push(new Article(ele));
+// });
 
-ourLocalData.forEach(function(ele) {
-  articles.push(new Article(ele));
-});
+Article.loadingArticles = function(passingData) {
+  passingData.sort(function(a,b) {
+    return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
+  }).forEach(function(ele) {
+    Article.articles.push(new Article(ele));
+  });
+};
