@@ -1,5 +1,6 @@
 // Configure a view object, to hold all our functions for dynamic updates and article-related event handlers.
 var articleView = {};
+var arrayOfArticles;
 
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
@@ -69,4 +70,18 @@ articleView.renderIndexPage = function() {
   articleView.handleMainNav();
   articleView.setTeasers();
 };
+
+$.ajax('/data/hackerIpsum.json', {
+  	method: 'GET',
+  	success: function(response) {
+  		arrayOfArticles = response;
+      console.log(arrayOfArticles);
+      Article.articles = arrayOfArticles;
+      //push into articles array for loop?
+    articleView.renderIndexPage();
+  	},
+  	error: function(response) {
+  	console.log ('error', response);
+  }
+});
 // TODO: start the retrieval process for our data!

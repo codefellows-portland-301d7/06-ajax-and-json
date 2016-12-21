@@ -4,7 +4,7 @@ function Article (opts) {
   }
 }
 
-var articles = [];
+Article.articles = [];
 
 /* TODO: Instead of a global `articles = []` array, let's track this list of all
  articles directly on the constructor function. Note: it is NOT on the prototype.
@@ -30,10 +30,10 @@ Article.prototype.toHtml = function(scriptTemplateId) {
 /* TODO: Refactor this code into a function for greater control.
     It will take in our data, and process it via the Article constructor: */
 
-ourLocalData.sort(function(a,b) {
+Articles.articles.sort(function(a,b) {
   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
 });
 
-ourLocalData.forEach(function(ele) {
+Articles.articles.forEach(function(ele) { //wtf
   articles.push(new Article(ele));
 });
