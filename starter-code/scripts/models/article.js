@@ -4,7 +4,7 @@ function Article (opts) {
   }
 }
 
-var articles = [];
+// var articles = [];
 
 /* TODO: Instead of a global `articles = []` array, let's track this list of all
  articles directly on the constructor function. Note: it is NOT on the prototype.
@@ -39,3 +39,11 @@ ourLocalData.sort(function(a,b) {
 ourLocalData.forEach(function(ele) {
   articles.push(new Article(ele));
 });
+
+Article.loadingArticles = function(passingData) {
+  passingData.sort(function(a,b) {
+    return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
+  }).forEach(function(ele) {
+    Article.articles.push(new Article(ele));
+  });
+};
