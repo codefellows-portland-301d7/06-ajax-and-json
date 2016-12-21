@@ -4,9 +4,8 @@ function Article (opts) {
   }
 }
 
-var articles = [];
-
-/* TODO: Instead of a global `articles = []` array, let's track this list of all
+Article.articles = [];
+/* TODO: DONE Instead of a global `articles = []` array, let's track this list of all
  articles directly on the constructor function. Note: it is NOT on the prototype.
  In JavaScript, functions are themselves objects, which means we can add
  properties/values to them at any time. In this case, we have a key:value pair
@@ -27,13 +26,15 @@ Article.prototype.toHtml = function(scriptTemplateId) {
  call these "class-level" functions, that are relevant to the entire "class"
  of objects that are Articles, rather than just one instance. */
 
-/* TODO: Refactor this code into a function for greater control.
+/* TODO: DONE Refactor this code into a function for greater control.
     It will take in our data, and process it via the Article constructor: */
 
-ourLocalData.sort(function(a,b) {
-  return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
-});
+Article.processData = function() {
+  ourLocalData.sort(function(a,b) {
+    return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
+  });
 
-ourLocalData.forEach(function(ele) {
-  articles.push(new Article(ele));
-});
+  ourLocalData.forEach(function(ele) {
+    Article.articles.push(new Article(ele));
+  });
+};
