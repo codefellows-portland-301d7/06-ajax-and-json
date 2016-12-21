@@ -1,5 +1,6 @@
 // Configure a view object, to hold all our functions for dynamic updates and article-related event handlers.
 var articleView = {};
+var arrayOfArticles;
 
 articleView.handleAuthorFilter = function() {
   $('#author-filter').on('change', function() {
@@ -55,7 +56,8 @@ articleView.setTeasers = function() {
 };
 
 articleView.renderIndexPage = function() {
-  Article.all.forEach(function(a){
+  //Article.all.forEach(function(a){
+  Article.articles.forEach(function(a){
     $('#articles').append(a.toHtml('#article-template'));
     if($('#category-filter option:contains("'+ a.category + '")').length === 0) {
       $('#category-filter').append(a.toHtml('#category-filter-template'));
@@ -69,4 +71,15 @@ articleView.renderIndexPage = function() {
   articleView.handleMainNav();
   articleView.setTeasers();
 };
+
+$.ajax('/data/hackerIpsum.json', {
+  	method: 'GET',
+  	success: function(response){ // the response is hackerIpsum.json, but parsed
+    Article.sortAndPush(response); // response is an array of objects that will be sorted and pushed into the array on the variable Article.article
+    articleView.renderIndexPage();
+  	},
+  	error: function(response) {
+  	console.log ('error', response);
+  }
+});
 // TODO: start the retrieval process for our data!
