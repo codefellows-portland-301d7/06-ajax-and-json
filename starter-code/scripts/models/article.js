@@ -32,13 +32,13 @@ Article.prototype.toHtml = function(scriptTemplateId) {
 /* TODO: Refactor this code into a function for greater control.
     It will take in our data, and process it via the Article constructor: */
 
-ourLocalData.sort(function(a,b) {
-  return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
-});
-
-ourLocalData.forEach(function(ele) {
-  articles.push(new Article(ele));
-});
+// ourLocalData.sort(function(a,b) {
+//   return (new Date(b.publishedOn)) - (new Date(a.publishedOn));
+// });
+//
+// ourLocalData.forEach(function(ele) {
+//   articles.push(new Article(ele));
+// });
 
 Article.loadingArticles = function(passingData) {
   passingData.sort(function(a,b) {

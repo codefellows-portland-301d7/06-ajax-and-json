@@ -70,3 +70,7 @@ articleView.renderIndexPage = function() {
   articleView.setTeasers();
 };
 // TODO: start the retrieval process for our data!
+$.getJSON( '/data/hackerIpsum.json', function ( data ) {
+  Article.loadingArticles(data);
+  console.log('Hello hello hello...  Are you out there?');
+});
