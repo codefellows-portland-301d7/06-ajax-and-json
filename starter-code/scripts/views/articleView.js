@@ -55,7 +55,7 @@ articleView.setTeasers = function() {
 };
 
 articleView.renderIndexPage = function() {
-  Article.all.forEach(function(a){
+  Article.articleArray.forEach(function(a){
     $('#articles').append(a.toHtml('#article-template'));
     if($('#category-filter option:contains("'+ a.category + '")').length === 0) {
       $('#category-filter').append(a.toHtml('#category-filter-template'));
@@ -69,4 +69,9 @@ articleView.renderIndexPage = function() {
   articleView.handleMainNav();
   articleView.setTeasers();
 };
-// TODO: start the retrieval process for our data!
+// TODO: DONE/ start the retrieval process for our data!
+
+$.getJSON('/data/hackerIpsum.json').done( function(data) {
+  Article.articleSort(data);
+  articleView.renderIndexPage();
+});
